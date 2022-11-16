@@ -3,11 +3,18 @@ import AppUI from "./AppUI";
 import "./style.css";
 
 function App() {
-  const [todos, setTodos] = useState([
-    {text: "Cortar cebolla", completed: true},
-    {text: "Tomar curso de react", completed: false},
-    {text: "Llorar con la llorona", completed: true},
-  ]);
+
+  const LOCAL_STORAGE_NAME = "todos_v1";
+  const localStorageTodos = localStorage.getItem(LOCAL_STORAGE_NAME);
+  let parsedTodos;
+  if(!localStorageTodos){
+    localStorage.setItem(LOCAL_STORAGE_NAME, JSON.stringify([]));
+    parsedTodos = [];
+  }
+  else
+    parsedTodos = JSON.parse(localStorageTodos);
+
+  const [todos, setTodos] = useState(parsedTodos);
   const [searchVal, setSearchVal] = useState("");  
 
   const completedTodosCount = todos.filter(todo => !!todo.completed).length;  
@@ -21,6 +28,11 @@ function App() {
     searchedTodos = todos;
   }
 
+  const saveTodos = (newTodos) => {
+    localStorage.setItem(LOCAL_STORAGE_NAME, JSON.stringify(newTodos));
+    setTodos(newTodos);
+  }
+
   const toggleCompletion = (text) => {
     const todoIndex = todos.findIndex(todo => todo.text === text);    
     const todosTemp = [...todos];
@@ -29,14 +41,14 @@ function App() {
     todosTemp[todoIndex].completed ? status = false : status = true;    
     todosTemp[todoIndex].completed = status;    
 
-    setTodos(todosTemp);
+    saveTodos(todosTemp);
   }
 
   const deleteTodo = (text) => {
     const todoIndex = todos.findIndex(todo => todo.text === text);    
     const todosTemp = [...todos];
     todosTemp.splice(todoIndex, 1)
-    setTodos(todosTemp);
+    saveTodos(todosTemp);
   }
 
   return (
