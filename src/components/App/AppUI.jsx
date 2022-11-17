@@ -4,47 +4,42 @@ import TodoSearch from "../TodoSearch";
 import TodoList from "../TodoList";
 import CreateTodoButton  from "../CreateTodoButton";
 import TodoItem from "../TodoItem";
+import { TodosContext } from '../../context/TodosContext';
 
-const AppUI = ({
-  loading,
-  error,
-  todosCount,
-  completedTodosCount,
-  setSearchVal,
-  searchVal,
-  searchedTodos,
-  toggleCompletion,
-  deleteTodo,
-}) => {
+const AppUI = () => {
   return (
       <div className='container'>
         <h1 className='title'>Todo App</h1>
-        <TodoCounter 
-          totalTodos={todosCount}
-          completedTodosCount={completedTodosCount}
-        />     
+        <TodoCounter />     
 
-        <TodoSearch 
-          setSearchVal={setSearchVal}
-          searchVal={searchVal} 
-        />
+        <TodoSearch />
         
-        <TodoList>  
-          { error && <p style={{"color": "red"}}>Lo sentimos, hubo un error: {error.stack}</p> }
-          { loading && <p>Cargando...</p> }
-          { (!loading && !searchedTodos.length) && <p>Crea tu primer to-do</p>}
-
-          {searchedTodos.map(
-            todo => <TodoItem 
-                      key={todo.text} 
-                      todo={todo} 
-                      toggleCompletion={toggleCompletion}
-                      deleteTodo={deleteTodo}
-                    /> 
+        <TodosContext.Consumer>
+          {/* Render props */}
+          {({ error, 
+              loading,
+              searchedTodos,
+              toggleCompletion, 
+              deleteTodo 
+            }) => (
+            <TodoList>  
+              { error && <p style={{"color": "red"}}>Lo sentimos, hubo un error: {error.stack}</p> }
+              { loading && <p>Cargando...</p> }
+              { (!loading && !searchedTodos.length) && <p>Crea tu primer to-do</p>}
+    
+              {searchedTodos.map(
+                todo => <TodoItem 
+                          key={todo.text} 
+                          todo={todo} 
+                          toggleCompletion={toggleCompletion}
+                          deleteTodo={deleteTodo}
+                        /> 
+              )}
+            </ TodoList>
           )}
-        </ TodoList>
+        </TodosContext.Consumer>
 
-      <CreateTodoButton /> 
+        <CreateTodoButton /> 
     
       </div>  
     )
