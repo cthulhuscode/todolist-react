@@ -6,7 +6,7 @@ function App() {
  
   return (
     <TodosProvider>
-      <AppUI />
+      <AppUI/>
     </TodosProvider>
   );
 }

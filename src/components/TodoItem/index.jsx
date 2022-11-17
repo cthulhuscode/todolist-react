@@ -1,8 +1,10 @@
-import React from 'react'
+import { useContext } from 'react'
+import { TodosContext } from '../../context/TodosContext';
 import { FaCheckCircle, FaRegTimesCircle } from "react-icons/fa";
 import "./style.css"
 
-const TodoItem = ({todo, toggleCompletion, deleteTodo}) => {
+const TodoItem = ({todo}) => {
+  const { toggleCompletion, deleteTodo } = useContext(TodosContext);
   const { text, completed} = todo;
 
   return (
