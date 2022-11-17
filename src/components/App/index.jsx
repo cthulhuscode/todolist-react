@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import AppUI from "./AppUI";
 import "./style.css";
 
 function App() {
-  const [todos, setTodos ] = useLocalStorage("todos_v1", []);
+  const {item: todos, loading, error, setItem: setTodos } = useLocalStorage("todos_v1", [{text: "lavar el coche", completed: false}]);
 
   const [searchVal, setSearchVal] = useState("");  
 
@@ -38,7 +38,10 @@ function App() {
   }
 
   return (
-    <AppUI todosCount={todosCount}
+    <AppUI 
+      error={error}
+      loading={loading}
+      todosCount={todosCount}
       completedTodosCount={completedTodosCount}
       setSearchVal={setSearchVal}
       searchVal={searchVal} 

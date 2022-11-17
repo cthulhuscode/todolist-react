@@ -6,6 +6,8 @@ import CreateTodoButton  from "../CreateTodoButton";
 import TodoItem from "../TodoItem";
 
 const AppUI = ({
+  loading,
+  error,
   todosCount,
   completedTodosCount,
   setSearchVal,
@@ -28,6 +30,10 @@ const AppUI = ({
         />
         
         <TodoList>  
+          { error && <p style={{"color": "red"}}>Lo sentimos, hubo un error: {error.stack}</p> }
+          { loading && <p>Cargando...</p> }
+          { (!loading && !searchedTodos.length) && <p>Crea tu primer to-do</p>}
+
           {searchedTodos.map(
             todo => <TodoItem 
                       key={todo.text} 
