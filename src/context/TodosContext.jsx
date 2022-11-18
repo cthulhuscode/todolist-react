@@ -21,6 +21,7 @@ export const TodosProvider = (props) => {
   ]);
 
   const [searchVal, setSearchVal] = useState("");
+  const [openModal, setOpenModal] = useState(false);
 
   const completedTodosCount = todos.filter((todo) => !!todo.completed).length;
   const todosCount = todos.length;
@@ -66,9 +67,11 @@ export const TodosProvider = (props) => {
         loading,
         todosCount,
         completedTodosCount,
-        setSearchVal,
+        searchedTodos,        
         searchVal,
-        searchedTodos,
+        openModal,
+        setOpenModal,
+        setSearchVal,
         toggleCompletion,
         deleteTodo,
       }}
