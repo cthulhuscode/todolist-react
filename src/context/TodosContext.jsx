@@ -16,9 +16,7 @@ export const TodosProvider = (props) => {
     loading,
     error,
     setItem: setTodos,
-  } = useLocalStorage("todos_v1", [
-    { text: "lavar el coche", completed: false },
-  ]);
+  } = useLocalStorage("todos_v1", []);
 
   const [searchVal, setSearchVal] = useState("");
   const [openModal, setOpenModal] = useState(false);
@@ -47,6 +45,13 @@ export const TodosProvider = (props) => {
     setTodos(todosTemp);
   };
 
+  const addTodo = (text) => {
+    let newTodo = { completed: false, text }
+    const todosTemp = [...todos, newTodo];
+    setTodos(todosTemp);
+  };
+
+
   const deleteTodo = (text) => {
     const todoIndex = todos.findIndex((todo) => todo.text === text);
     const todosTemp = [...todos];
@@ -73,6 +78,7 @@ export const TodosProvider = (props) => {
         setOpenModal,
         setSearchVal,
         toggleCompletion,
+        addTodo,
         deleteTodo,
       }}
     >

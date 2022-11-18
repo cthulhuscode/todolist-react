@@ -3,6 +3,7 @@ import TodoCounter from "../TodoCounter";
 import TodoSearch from "../TodoSearch";
 import TodoList from "../TodoList";
 import CreateTodoButton  from "../CreateTodoButton";
+import TodoForm from "../TodoForm";
 import { Modal } from "../Modal";
 import { TodosContext } from "../../context/TodosContext";
 
@@ -20,8 +21,10 @@ const AppUI = () => {
         <TodoList />
 
         {!!openModal && (
-          <Modal>
-            <h1>Portal</h1>
+          <Modal
+            closeModal={setOpenModal}
+          >
+            <TodoForm />
           </Modal>)
         }
 

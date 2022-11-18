@@ -16,18 +16,5 @@
 }
 
 .on-modal{
-  z-index: 10;  
-  position: absolute;
-  bottom: 100px;
-  background-color: #00a437;
-  color: #fff;
-
-  font-size: 1.3rem;
-
-  width: 250px;
-  height: 40px;
-}
-
-.on-modal::before{
-  content: "Add ";
+  display: none;
 }

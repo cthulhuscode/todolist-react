@@ -4,14 +4,12 @@ import ReactDOM from 'react-dom'
 import "./style.css";
 import { TodosContext } from "../../context/TodosContext";
 
-export const Modal = ({ children }) => {
-  const { setOpenModal } = useContext(TodosContext);
+export const Modal = ({ children, closeModal  }) => {
 
-  const onCancel = () => {
+  const onClose = () => {
     /* Así se puede acceder al estado previo del state */
-    setOpenModal(prevState => !prevState)
+    closeModal(prevState => !prevState)
   }
-
   /* Se le puede pasar cualquier cosa,
   incluso un componente de los ya hechos.
 
@@ -20,7 +18,7 @@ export const Modal = ({ children }) => {
   */
   return ReactDOM.createPortal(
     <div className='modal'>
-      <MdCancel className="cancel-icon" onClick={onCancel}/>
+      <MdCancel className="cancel-icon" onClick={onClose}/>
       {children}
     </div>,
     document.getElementById("modal")
