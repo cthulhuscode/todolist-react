@@ -29,6 +29,7 @@ const TodoForm = () => {
         placeholder='Cortar el cesped'
         onChange={(e) => {setTodoText(e.target.value)}} 
         value={todoText}
+        autoFocus
       />
       <div className='TodoForm-button_container'>
         <button className='TodoForm-button_cancel' type='button' onClick={onCancel}>Cancel</button>

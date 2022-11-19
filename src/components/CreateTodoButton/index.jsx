@@ -3,20 +3,22 @@ import "./style.css";
 import { TodosContext } from "../../context/TodosContext";
 
 const CreateTodoButton = () => {
-  const { setOpenModal, openModal } = useContext(TodosContext);
+  const { setOpenModal, openModal, error, loading } = useContext(TodosContext);
 
   const onNewTodo = () => {
     setOpenModal(true);
   };
 
-  return (
-    <button
-      className={`CreateTodoButton ${openModal && 'on-modal'}`}
-      onClick={() => onNewTodo()}
-    >
-      New Todo
-    </button>
-  );
+  return <>
+    { (!error && !loading) && (
+      <button
+        className={`CreateTodoButton ${openModal && 'on-modal'}`}
+        onClick={() => onNewTodo()}
+      >
+        New Todo
+      </button>
+     )}
+  </>      
 };
 
 export default CreateTodoButton;

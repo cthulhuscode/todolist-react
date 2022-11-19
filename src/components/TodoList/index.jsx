@@ -1,7 +1,9 @@
 import { useContext } from 'react'
 import { TodosContext } from '../../context/TodosContext';
 import TodoItem from '../TodoItem';
-import ThreeDots from "../ThreeDots";
+import TodosLoading from "../TodosLoading";
+import TodosError from '../TodosError';
+import TodosEmpty from '../TodosEmpty';
 import "./style.css"
 
 const TodoList = () => {
@@ -10,9 +12,9 @@ const TodoList = () => {
    return (
     <div className='TodoList'>
       <ul>
-      { error && <p style={{"color": "red"}}>Lo sentimos, hubo un error: {error.stack}</p> }
-      { loading && <ThreeDots /> }
-      { (!loading && !searchedTodos.length) && <p>Crea tu primer to-do</p>}
+      { error && <TodosError /> }
+      { loading && <TodosLoading /> }
+      { (!loading && !searchedTodos.length && !error) && <TodosEmpty />}
 
       {searchedTodos.map(
         todo => <TodoItem key={todo.text} todo={todo} /> 

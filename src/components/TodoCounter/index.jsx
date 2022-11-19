@@ -4,11 +4,11 @@ import "./style.css"
 
 const TodoCounter = () => {
 
-  const {totalTodos, completedTodosCount} = useContext(TodosContext);
+  const {todosCount, completedTodosCount} = useContext(TodosContext);
 
   return (
     <div className='TodoCounter'>
-      <h2>Has completado {completedTodosCount} de {totalTodos} To-dos</h2>
+      <h2>Has completado {completedTodosCount} de {todosCount} To-dos</h2>
     </div>
   )
 }
