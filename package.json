@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://github.cthulhuscode.io/todolist-react",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -22,6 +23,5 @@
     "@vitejs/plugin-react": "^2.2.0",
     "gh-pages": "^4.0.0",
     "vite": "^3.2.3"
-  },
-  "homepage": "https://github.cthulhuscode.io/todolist-react"
+  }
 }
